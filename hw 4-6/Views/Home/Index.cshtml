@@ -1,0 +1,73 @@
+﻿@model SimchaViewModel
+<!-- alert -->
+@if (Model.Message != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>@Model.Message</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+<!-- simchas table -->
+<div class="container">
+    <h1>Simchas</h1><br />
+    <button id="view-new-simcha-modal" class="btn btn-danger">New Simcha</button>
+    <table style="margin-top: 12px" class="table table-bordered table-hover table-striped">
+        <tr class="text-center">
+            <th>Contributions</th>
+            <th>Simcha Name</th>
+            <th>Contributor Count</th>
+            <th>Total Contributed</th>
+            <th>Simcha Date</th>
+        </tr>
+        @foreach (Simcha s in Model.Simchos)
+        {
+            <tr>
+                <td><a data-id="@s.SimchaId" href="/home/contributions?simchaId=@s.SimchaId" class="btn btn-primary contributions" >Contributions</a></td>
+                <td>@s.SimchaName</td>
+                <td>@s.TotalContributed/@Model.TotalContributors</td>
+                <td>@s.AmountContributed.ToString("C")</td>
+                <td>@s.SimchaDate.ToShortDateString()</td>
+            </tr>
+        }
+    </table>
+</div>
+
+<!-- modal for adding a simcha -->
+<div id="new-simcha-modal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">New Simcha</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/home/addSimcha" method="post">
+                    Simcha Name
+                    <input type="text" name="simchaName" id="simcha-name" class="form-control" placeholder="Simcha Name" />
+                    <br />
+                    Simcha Date
+                    <input type="date" name="simchaDate" class="form-control" />
+                    <br />
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+                        <button class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+@section Scripts{
+    <script src="~/js/Index.js"></script>
+}

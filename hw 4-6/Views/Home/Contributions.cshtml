@@ -1,0 +1,44 @@
+﻿@model ContributionViewModel
+
+<div class="container">
+    <h1>Contributors for the @Model.Simcha.SimchaName</h1><br />
+    <input type="text" placeholder="Search" class="form-control-sm search-contributor" />
+    <button class="btn btn-danger clear-search">Clear</button>
+    <form action="/home/makeContribution" method="post">
+        <table style="margin-top: 12px" class="table table-bordered table-hover table-striped contributor-table">
+            <tr class="text-center">
+                <th>Contribute</th>
+                <th>Name</th>
+                <th>Balance</th>
+                <th>Always Include</th>
+                <th>Amount</th>
+            </tr>
+            @{ int counter = 0;}
+            @foreach(Contributor c in Model.Contributors)
+            {
+                <tr>
+                    <td>
+                        <input type="checkbox" name="contrs[@counter].WantsToContribute" value="true"  
+                        @(Model.IdsContributed.Contains(c.ContributorId) ? "checked='checked' disabled" : "")   />Contribute
+                    </td>
+                    <td>@c.FirstName @c.LastName</td>
+                    <td>@c.Balance.ToString("C")</td>
+                    <td><span class="@(c.AlwaysInclude==true ? "fa fa-check-circle" : "")"></span></td>
+                    <td>
+                        <input type="text" name="contrs[@counter].contributionAmount" value="5.00" class="form-control" />
+                        <input type="hidden" name="contrs[@counter].ContributorId" value="@c.ContributorId" />
+                    </td>
+                </tr>
+                counter++;
+            }
+        </table>
+        <input type="hidden" name="SimchaId" value="@Model.Simcha.SimchaId" />
+        <div style="text-align: center">
+            <button style="margin-top: 15px;" class="btn btn-danger">Update</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts{
+    <script src="~/js/SearchAndClearSearch.js"></script>
+} 
