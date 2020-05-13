@@ -3,7 +3,9 @@
 
     $("body").on('click', '.view-deposit-modal', function () {
         $("#deposit-contributor-id").attr('value', `${$(this).data('id')}`);
-        $("#depositer-name").text(`Deposit for ${$(this).data('firstname')} ${$(this).data('lastname')}`)
+        $("#depositer-name").text(`Deposit for ${$(this).data('firstname')} ${$(this).data('lastname')}`);
+        $("#deposit-amount").val('');
+        $("#date-for-deposit").val('');
         $("#deposit-modal").modal();
     });
 
