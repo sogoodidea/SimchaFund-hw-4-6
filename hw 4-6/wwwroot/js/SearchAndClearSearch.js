@@ -1,4 +1,6 @@
 ﻿$(() => {
+
+
     let allRows = $(".contributor-table tr ");
     $(".search-contributor").keyup(function () {
         let value = $(this).val().toLowerCase();

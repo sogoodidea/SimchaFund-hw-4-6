@@ -12,6 +12,9 @@
         $("#initial-deposit").show();                                           //resets to show the deposit amount textbox
         $("#contributor-header").text('New Contributor');                       //resets text of header
         $("#date-created-contributor").val('');                                 //resets date to empty
+        $("#first-name").val('');                                                 //resets first name textbox
+        $("#last-name").val('');                                                  //resets last name textbox
+        $("#phone-number").val('');                                              //resets phone number textbox
         $("#new-contributor-modal").modal();
     });
 
