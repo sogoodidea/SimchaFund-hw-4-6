@@ -5,7 +5,7 @@
     $(".search-contributor").keyup(function () {
         let value = $(this).val().toLowerCase();
         allRows.show().filter(function () {
-            let text = $(this).text().toLowerCase();
+            let text = $(this).find('td:eq(1)').text().toLowerCase();
             return !~text.indexOf(value);
         }).hide();
     });
